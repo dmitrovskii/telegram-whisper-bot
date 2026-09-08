@@ -1,7 +1,7 @@
 # Telegram Transcription Bot
 
 
-> An asynchronous, Telegram bot designed to instantly transcribe voice messages into text. Powered by the Groq API (using the Whisper model) and built with Aiogram 3, it offers highly accurate speech-to-text conversion with smart language auto-detection, making it a simply tool for processing voice message on the go.
+> An asynchronous Telegram bot designed to instantly transcribe voice messages into text. Powered by the Groq API (using the Whisper model) and built with Aiogram 3, it offers highly accurate speech-to-text conversion with smart language auto-detection, making it a simple tool for processing voice messages on the go.
 
 ---
 
@@ -26,9 +26,14 @@
 
 ## 📦 Prerequisites
 
-Before you begin, make sure you have installed:
-* [Git](https://git-scm.com/)
-* [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/)
+Choose your environment:
+
+* **Windows:**
+  * [Python](https://www.python.org/downloads) 3.14+ (ensure Python is added to PATH)
+  * [Git](https://git-scm.com/)
+* **Linux / macOS (Docker):**
+  * [Docker](https://docs.docker.com/get-docker/) & [Docker Compose](https://docs.docker.com/compose/)
+  * [Git](https://git-scm.com/)
 
 ---
 
@@ -36,36 +41,51 @@ Before you begin, make sure you have installed:
 
 | Variable | Description | Default |
 | :--- | :--- | :--- |
-| `BOT_TOKEN` | Telegram Bot API token obtained from @BotFather | - |
-| `GROQ_TOKEN` | API key from Groq Cloud | - |
-| `GROQ_BASE_URL` | Endpoint for the OpenAI-compatible client | `https://api.groq.com/openai/v1` |
+| `BOT_TOKEN` | Telegram Bot API token obtained from [@BotFather](https://t.me/BotFather) | *Required* |
+| `GROQ_TOKEN` | API key from [Groq Cloud](https://console.groq.com/) | *Required* |
+| `GROQ_BASE_URL` | Endpoint for OpenAI-compatible client | `https://api.groq.com/openai/v1` |
 | `STT_MODEL` | Speech-to-Text model for voice transcription | `whisper-large-v3-turbo` |
 | `LLM_MODEL` | Text model for generating summaries | `openai/gpt-oss-20b` |
 ---
 
 ## Quick Start
 
-### 1. Clone the repo
+### 1. Clone the repository
 ``` bash
 git clone https://github.com/dmitrovskii/transcription-bot
 cd transcription-bot
 ```
 
-### Setup environment variables
+### 2. Choose your platform
+
+#### 🪟 Windows (Automatic Setup)
+1. **Run the script:** Double-click `run.bat` (or run `run.bat` in CMD/PowerShell)
+    * On the first launch, the script will generate a `.env` file and pause.
+2. **Add credentials:** Open the newly created `.env` file in any text editor, insert your BOT_TOKEN and GROQ_TOKEN, and save.
+3. **Start the bot:** Run `run.bat` again. The script will set up the virtual environment, install requirements, and run the bot.
+
+#### 🐧 Linux / Server (Docker Compose)
+
+1. Setup environment variables:
 Copy the example environment file and specify your API tokens:
 ``` bash
 cp .env.example .env
+nano .env
 ```
 
-### Running via Docker Compose
+2. Build and launch:
 Build the image and start the container in the background:
 ``` bash 
 docker compose up -d --build 
 ```
+
+- View logs: `docker compose logs -f`
+- Stop bot: `docker compose down`
+
 The bot is now running! Open Telegram, find your bot, and send `/start` to begin.
 
 ---
 
-### 👨‍💻 Author & License
+## 👨‍💻 Author & License
 * **Author:** @dmitrovskii
-* **License:** Mit Licenses
+* **License:** MIT License
