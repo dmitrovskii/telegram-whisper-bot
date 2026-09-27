@@ -1,6 +1,13 @@
-from openai import AsyncOpenAI
-from config import config
+from collections import deque
+import time
+from pathlib import Path
+
 from aiogram import Bot
+from openai import AsyncOpenAI
+
+from config import config
+
+timestamps = deque()
 
 groq_client = AsyncOpenAI(
     base_url=config.groq_base_url,
@@ -8,20 +15,31 @@ groq_client = AsyncOpenAI(
 )
 
 async def process_voice(file_id: str, language_code: str, bot: Bot):
-    file = await bot.download(file=file_id)
+    now = time.monotonic()
 
-    params = {
-        "file": ("voice.ogg", file.read()),  # type: ignore
-        "model": config.stt_model,
-        "response_format": "text",
-    }
+    while timestamps and timestamps[0] < now - config.window_time:
+        timestamps.popleft()
 
-    if language_code and language_code != "auto":
-        params["language"] = language_code
+    if len(timestamps) < config.rate_limit:
+        timestamps.append(now)
 
-    transcription = await groq_client.audio.transcriptions.create(**params)
+        file = await bot.download(file=file_id)
 
-    return {"message": transcription}
+        params = {
+            "file": ("voice.ogg", file.read()),  # type: ignore
+            "model": config.stt_model,
+            "response_format": "text",
+        }
+
+        if language_code and language_code != "auto":
+            params["language"] = language_code
+
+        message = await groq_client.audio.transcriptions.create(**params)
+
+    else:
+        message = "Too many requests. Try again later."
+
+    return {"message": message}
 
 async def process_text(transcribed_text: str):
     response = await groq_client.chat.completions.create(
