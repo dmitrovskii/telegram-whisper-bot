@@ -15,6 +15,9 @@ class Settings(BaseSettings):
     stt_model: str
     llm_model: str
 
+    window_time: float = 60.0
+    rate_limit: int = 20
+
     model_config = SettingsConfigDict(
         env_file=ENV,
         env_file_encoding='utf-8'
