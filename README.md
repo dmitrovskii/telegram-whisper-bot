@@ -46,6 +46,9 @@ Choose your environment:
 | `GROQ_BASE_URL` | Endpoint for OpenAI-compatible client | `https://api.groq.com/openai/v1` |
 | `STT_MODEL` | Speech-to-Text model for voice transcription | `whisper-large-v3-turbo` |
 | `LLM_MODEL` | Text model for generating summaries | `openai/gpt-oss-20b` |
+| `WINDOW_TIME` | Time window for rate limiting (in seconds)  | `60.0` |
+| `RATE_LIMIT` | Maximum requests allowed per time window | `20` |
+| `PROMPT_FILE_NAME` | Name of the file containing the system prompt | `instruction.txt` |
 ---
 
 ## Quick Start
