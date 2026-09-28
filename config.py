@@ -18,6 +18,8 @@ class Settings(BaseSettings):
     window_time: float = 60.0
     rate_limit: int = 20
 
+    prompt_file_name: str
+
     model_config = SettingsConfigDict(
         env_file=ENV,
         env_file_encoding='utf-8'

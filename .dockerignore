@@ -16,6 +16,7 @@ data/
 *.md
 *.txt
 !requirements.txt
+!instruction.txt
 
 .dockerignore
 Dockerfile
