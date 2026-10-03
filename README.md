@@ -1,5 +1,10 @@
-# Telegram Transcription Bot
-
+# Telegram Whisper Bot 
+![Python](https://img.shields.io/badge/Python-3.14+-3776AB?logo=python&logoColor=white)
+![Aiogram](https://img.shields.io/badge/Aiogram_3-2CA5E0?logo=telegram&logoColor=white)
+![Groq](https://img.shields.io/badge/Groq_API-F55036?logo=fastapi&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-aiosqlite-003B57?logo=sqlite&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
 
 > An asynchronous Telegram bot designed to instantly transcribe voice messages into text. Powered by the Groq API (using the Whisper model) and built with Aiogram 3, it offers highly accurate speech-to-text conversion with smart language auto-detection, making it a simple tool for processing voice messages on the go.
 
@@ -9,10 +14,11 @@
 
 * 🎙️ **High-Speed Transcription:** Instantly converts voice messages to text using the advanced `whisper-large-v3-turbo` model via Groq API.
 * 🌍 **Smart Language Detection:** Supports explicit language selection (English, Ukrainian) via inline keyboards, or an "Auto-detect" mode for mixed speech to prevent AI hallucinations.
+* 📝 **On-Demand Summarization:** Generates concise LLM summaries via an inline action button for long transcriptions (>1:30 min).
+* 🛡️ **Rate Limiting & Protection:** Built-in in-memory rate limiter with custom time windows to safeguard external API quotas and prevent user spam.
 * ⚡ **Fully Asynchronous:** Built with `aiogram` and `aiosqlite` for non-blocking database operations and high concurrency.
 * 🐳 **Docker Ready:** Fast, reliable, and isolated deployment using Docker and Docker Compose (includes persistent volume for the database).
 * ⚙️ **Highly Configurable:** No hardcoded constants. Easily switch AI models and API endpoints using `.env` variables.
-* 📝 **Text Summarization:** Integrated LLM support to generate quick summaries from long transcriptions.
 ---
 
 ## 🛠 Tech Stack
@@ -55,8 +61,8 @@ Choose your environment:
 
 ### 1. Clone the repository
 ``` bash
-git clone https://github.com/dmitrovskii/transcription-bot
-cd transcription-bot
+git clone https://github.com/dmitrovskii/telegram-whisper-bot.git
+cd telegram-whisper-bot
 ```
 
 ### 2. Choose your platform
